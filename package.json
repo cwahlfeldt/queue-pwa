@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "hyperapp": "^1.2.6",
+    "moment": "^2.22.2",
     "parcel": "^1.9.3",
     "style.css": "^1.0.0",
     "tachyons-custom": "^4.9.5"
