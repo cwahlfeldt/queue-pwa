@@ -31,7 +31,7 @@ queuers: [
     party_size: 12,
     phone_number: '2178675309',
     entry: '2018-07-13T16:18:55.842Z',
-    end: null,
+    end: '2018-07-13T16:34:55.842Z',
     deleted: false,
     completed: false,
   },

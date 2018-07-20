@@ -31,3 +31,12 @@ h4 {
 .flex-grow-0 {
   flex-grow: 0;
 }
+
+.counter-reset {
+  counter-reset: section;
+}
+
+.counter:before {
+  counter-increment: section;
+  content: counter(section);
+}

@@ -4,15 +4,22 @@
   "description": "The new queue app built to be a PWA",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel ./src/index.html --out-dir ./dist"
+    "start": "parcel ./src/index.html --out-dir ./dist",
+    "build": "parcel build ./src/index.html --out-dir ./dist"
   },
   "author": "cwahlfeldt",
   "license": "ISC",
+  "devDependencies": {
+    "parcel": "^1.9.7"
+  },
   "dependencies": {
+    "@hyperapp/router": "^0.7.0",
+    "autoprefixer": "^8.6.5",
     "hyperapp": "^1.2.6",
     "moment": "^2.22.2",
-    "parcel": "^1.9.3",
+    "postcss": "^7.0.0",
+    "postcss-modules": "^1.1.0",
+    "postcss-preset-env": "^5.2.2",
     "style.css": "^1.0.0",
     "tachyons-custom": "^4.9.5"
   }
