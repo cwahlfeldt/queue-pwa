@@ -51,7 +51,9 @@ const view = (state, actions) => (
         </div>
       }
       <AddButton isOpen={state.openModal} toggleModal={actions.toggleModal} />
-      <Modal isOpen={state.openModal} />
+      <Modal
+        isOpen={state.openModal}
+      />
     </section>
   </main>
 )
