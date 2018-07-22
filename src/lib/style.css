@@ -47,3 +47,12 @@ h4 {
   height: var(--add-button-size);
   line-height: var(--add-button-size);
 }
+
+.vis-h {
+  visibility: hidden;
+}
+
+.vis-v {
+  visibility: visible;
+  visibility: hidden;
+}

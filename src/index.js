@@ -1,6 +1,8 @@
 import { h, app } from 'hyperapp'
 import { queuers } from './lib/mockdata.yml'
 import Nav from './components/Nav'
+import AddButton from './components/AddButton'
+import Modal from './components/Modal'
 import moment from 'moment'
 
 import 'tachyons-custom'
@@ -11,12 +13,12 @@ const data = queuers
 
 const state = {
   queuers: null,
-  openModal: false,
+  openModal: true,
 }
 
 const actions = {
-  setQueuers: state => ({queuers: data}),
-  toggleModal: state => ({openModal: !state.openModal}),
+  setQueuers: () => ({queuers: data}),
+  toggleModal: () => state => ({openModal: !state.openModal}),
 }
 
 const renderQueue = (queuers) => (
@@ -41,15 +43,16 @@ const view = (state, actions) => (
     }}
     class="vw-100 h-100 bg-light-gray pr5"
   >
-    <div class="outer flex flex-row counter-reset">
+    <section class="outer flex flex-row counter-reset">
       <Nav />
       {state.queuers !== null &&
         <div class="queue list flex flex-column mw6 w-100 center pb4 pt4">
           {renderQueue(state.queuers)}
         </div>
       }
-      <button class="add-button dim link button-reset bg-green fixed bottom-0 right-0 br-100 white aktiv pa3 lh- ma4 f2 w3 dib shadow-1">&#43;</button>
-    </div>
+      <AddButton isOpen={state.openModal} toggleModal={actions.toggleModal} />
+      <Modal isOpen={state.openModal} />
+    </section>
   </main>
 )
 
