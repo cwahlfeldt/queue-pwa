@@ -13,7 +13,7 @@ const data = queuers
 
 const state = {
   queuers: null,
-  openModal: true,
+  openModal: false,
 }
 
 const actions = {
@@ -53,6 +53,7 @@ const view = (state, actions) => (
       <AddButton isOpen={state.openModal} toggleModal={actions.toggleModal} />
       <Modal
         isOpen={state.openModal}
+        toggleModal={actions.toggleModal}
       />
     </section>
   </main>

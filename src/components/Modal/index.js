@@ -1,7 +1,10 @@
 import { h } from 'hyperapp'
 
 const Modal = ({
-  isOpen,
+  isOpen = false,
+  title = 'Title',
+  timeWaiting = null,
+  status = null,
   name = false,
   onNameChange,
   party = false,
@@ -11,30 +14,43 @@ const Modal = ({
   notes = false,
   onNotesChange,
   color = 'green',
-  buttonTitle = 'Button Title',
+  buttonTitle = 'Save',
   onButtonClick,
+  toggleModal,
 }) => (
   <section
     class={`
       ${isOpen ? 'vis-s' : 'vis-h'}
-      modal w-100 h-100 bg-black-80
-      fixed z-0 flex flex-column
+      modal w-100 h-100 bg-white-80
+      fixed z-1 flex flex-column
       justify-center items-center
     `}
   >
-    <div class="mw7 w-100 center bg-white br2 relative top-0 left-0 pa5 z1">
+    <div class="mw7 w-100 center bg-white br2 relative top-0 left-0 ph5 pt4 pb5 z-2 shadow-1">
+      <h1 class="avenir fw5 f2 tracked mb0">{title}</h1>
+      <div class="meta mb3 flex flex-row">
+        {timeWaiting !== null &&
+          <p class="time avenir f5 fw2"></p>
+        }
+        {status !== null &&
+          <p class="status avenir f5 fw3"></p>
+        }
+      </div>
       <form>
         <label for="name" class="ttu avenir f6 fw2">Name</label>
-        <input name="name" class="pa2 mb3 db w-100 avenir f4" type="text" value={name || ''} />
+        <input name="name" class="ba b--light-gray pa2 br2 mb3 db w-100 avenir f4" type="text" value={name || ''} />
         <label for="party" class="ttu avenir f6 fw2">Party of</label>
-        <input name="party" class="pa2 mb3 db w-100 avenir f4" type="text" value={party} />
+        <input name="party" class="ba b--light-gray pa2 br2 mb3 db w-100 avenir f4" type="text" value={party || ''} />
         <label for="number" class="ttu avenir f6 fw2">Phone Number</label>
-        <input name="number" class="pa2 mb3 w-100 avenir f4" type="text" value={number} />
+        <input name="number" class="ba b--light-gray pa2 mb3 br2 w-100 avenir f4" type="text" value={number || ''} />
         <label for="notes" class="ttu avenir f6 fw2">Notes</label>
-        <textarea nam="notes" class="b--light-gray pa2 db w-100 h4 avenir f4">{notes}</textarea>
+        <textarea name="notes" class="ba b--light-gray pa2 br2 db w-100 h4 avenir f4">{notes || ''}</textarea>
         <button
-          onclick={onButtonClick}
-          class={`dim dib pa3 lh-0 bn bg-${color} br2 white ttu f5 tracked w-100 mt4`}
+          onclick={(e) => {
+            e.preventDefault()
+            onButtonClick()
+          }}
+          class={`dim dib pv4 lh-0 bn bg-${color} br2 white ttu tracked f4 fw6 w-100 mt4`}
         >
           {buttonTitle}
         </button>
