@@ -11,7 +11,9 @@ const AddButton = ({isOpen, toggleModal, onAddQueue}) => (
       dib shadow-1
     `}
   >
-    &#43;
+    <span class="dib">
+      &#43;
+    </span>
   </button>
 )
 

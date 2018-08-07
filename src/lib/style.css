@@ -62,9 +62,25 @@ h4 {
 }
 
 .add-button {
-  transition: transform 200ms ease-in-out;
+  transition: transform 150ms ease-in-out;
 }
 
 .add-button:focus {
   outline: none;
+}
+
+.modal {
+  transition: opacity 200ms ease-in-out;
+}
+
+.form-wrap {
+  transition: transform 400ms ease-in-out;
+}
+
+.translate-0 {
+  transform: translate3d(0, -50%, 0);
+}
+
+.translate-100 {
+  transform: translate3d(0, 0, 0);
 }

@@ -20,13 +20,19 @@ const Modal = ({
 }) => (
   <section
     class={`
-      ${isOpen ? 'vis-s' : 'vis-h'}
+      ${isOpen ? 'o-100' : 'o-0'}
       modal w-100 h-100 bg-white-80
       fixed z-1 flex flex-column
       justify-center items-center
     `}
   >
-    <div class="mw7 w-100 center bg-white br2 relative top-0 left-0 ph5 pt4 pb5 z-2 shadow-1">
+    <div class={`
+        ${isOpen ? 'translate-100' : 'translate-0'}
+        form-wrap mw7 w-100 center
+        bg-white br2 relative top-0
+        left-0 ph5 pt4 pb5 z-2 shadow-1
+      `}
+    >
       <h1 class="avenir fw5 f2 tracked mb0">{title}</h1>
       <div class="meta mb3 flex flex-row">
         {timeWaiting !== null &&
