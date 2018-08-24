@@ -53,12 +53,11 @@ h4 {
 }
 
 .vis-h {
-  visibility: hidden;
+  visibility: hidden !important;
 }
 
 .vis-v {
-  visibility: visible;
-  visibility: hidden;
+  visibility: visible !important;
 }
 
 .add-button {
@@ -70,11 +69,12 @@ h4 {
 }
 
 .modal {
-  transition: opacity 200ms ease-in-out;
+  visibility: hidden;
+  transition: all 200ms ease-in-out;
 }
 
 .form-wrap {
-  transition: transform 400ms ease-in-out;
+  transition: all 400ms ease-in-out;
 }
 
 .translate-0 {

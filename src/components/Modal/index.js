@@ -17,10 +17,12 @@ const Modal = ({
   buttonTitle = 'Save',
   onButtonClick,
   toggleModal,
+  queuer
 }) => (
   <section
+    id="modal"
     class={`
-      ${isOpen ? 'o-100' : 'o-0'}
+      ${isOpen ? 'o-100 vis-v' : 'o-0 vis-h'}
       modal w-100 h-100 bg-white-80
       fixed z-1 flex flex-column
       justify-center items-center

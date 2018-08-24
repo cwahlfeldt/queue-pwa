@@ -18,13 +18,16 @@ const state = {
 }
 
 const actions = {
+  init: () => (state, actions) => {
+    actions.setQueuers()
+  },
   setQueuers: () => ({queuers: data}),
-  toggleModal: (currentQueuer) => state => ({openModal: !state.openModal, currentQueuer}),
+  toggleModal: currentQueuer => state => ({openModal: !state.openModal, currentQueuer}),
 }
 
 const renderQueue = (queuers, toggleModal) => (
   queuers.map((queuer, index) => (
-    <div onclick={() => toggleModal(queuer)}>
+    <div onclick={() => toggleModal(queuer)} className="pointer">
       {queuer.end === null &&
         <div class="flex flex-row ph4 mv2 bg-white shadow-1 br2 items-center">
           <h4 class="index avenir black fw5 f4 w3 counter"></h4>
@@ -39,9 +42,7 @@ const renderQueue = (queuers, toggleModal) => (
 
 const view = (state, actions) => (
   <main
-    oncreate={() => {
-      actions.setQueuers()
-    }}
+    oncreate={actions.init}
     class="vw-100 h-100 bg-light-gray pr5"
   >
     <section class="outer flex flex-row counter-reset">
@@ -55,6 +56,7 @@ const view = (state, actions) => (
       <Modal
         isOpen={state.openModal}
         toggleModal={actions.toggleModal}
+        queuer={state.currentQueuer}
       />
     </section>
   </main>
