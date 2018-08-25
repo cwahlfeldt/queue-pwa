@@ -1,8 +1,9 @@
 import { h } from 'hyperapp'
 
-const AddButton = ({isOpen, toggleModal, onAddQueue}) => (
+const AddButton = ({isOpen, toggleModal, id}) => (
   <button
-    onclick={() => toggleModal()}
+    id={id}
+    onclick={toggleModal}
     class={`
       ${isOpen ? 'rotate-45' : 'rotate-90'}
       add-button button-reset

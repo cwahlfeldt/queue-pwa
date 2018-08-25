@@ -13,21 +13,98 @@ const data = queuers
 
 const state = {
   queuers: null,
-  currentQueuer: null,
-  openModal: false,
+  isNewModalOpen: true,
+  isModalOpen: false,
+  name: '',
+  party: '',
+  number: '',
+  notes: '',
 }
 
 const actions = {
+  // init for the entire apps data and or dom manipulations
   init: () => (state, actions) => {
     actions.setQueuers()
   },
+
+  // TODO: set to real data
   setQueuers: () => ({queuers: data}),
-  toggleModal: currentQueuer => state => ({openModal: !state.openModal, currentQueuer}),
+
+  // switch save and edit modals
+  toggleModal: (queuer) => (state, actions) => {
+    if (queuer.target !== undefined || queuer === '') {
+      actions.toggleAddModal()
+      setTimeout(() => {
+        actions.setModalToggle(true)
+      }, 300)
+    } else {
+      actions.toggleEditModal(queuer)
+      actions.setModalToggle(false)
+    }
+  },
+  setModalToggle: isNewModalOpen => state => ({isNewModalOpen}),
+
+  // toggles the edit an existing modal
+  toggleEditModal: (currentQueuer) => (state, actions) => {
+    if (state.name !== '' && state.isModalOpen) {
+      setTimeout(() => {
+        actions.setCurrentQueuer('')
+      }, 300)
+      return {isModalOpen: !state.isModalOpen}
+    } else {
+      actions.setCurrentQueuer(currentQueuer)
+      return {isModalOpen: !state.isModalOpen}
+    }
+  },
+  setCurrentQueuer: ({name, party_size, phone_number, notes}) => state => ({
+    name,
+    party: party_size,
+    number: phone_number,
+    notes,
+  }),
+
+  // toggles the save new modal
+  toggleAddModal: () => (state, actions) => {
+    setTimeout(() => {
+      actions.nullifyFields()
+    }, 300)
+    return {isModalOpen: !state.isModalOpen}
+  },
+
+  saveQueuer: () => {
+    console.log('saveing queuer')
+  },
+
+  updateQueuer: () => {
+    console.log('updating queuer')
+  },
+
+  removeQueuer: () => {
+    console.log('remove queuer')
+  },
+
+  seatQueuer: () => {
+    console.log('seat queuer')
+  },
+
+  nullifyFields: () => state => ({
+    name: '',
+    party: '',
+    number: '',
+    notes: '',
+    currentQueuer: '',
+  }),
+
+  // all input setters
+  setName: ({target}) => state => ({name: target.value.trim()}),
+  setParty: ({target}) => state => ({party: target.value.trim()}),
+  setNumber: ({target}) => state => ({number: target.value.trim()}),
+  setNotes: ({target}) => state => ({notes: target.value}),
 }
 
 const renderQueue = (queuers, toggleModal) => (
   queuers.map((queuer, index) => (
-    <div onclick={() => toggleModal(queuer)} className="pointer">
+    <div onclick={() => toggleModal(queuer)} class="pointer">
       {queuer.end === null &&
         <div class="flex flex-row ph4 mv2 bg-white shadow-1 br2 items-center">
           <h4 class="index avenir black fw5 f4 w3 counter"></h4>
@@ -52,11 +129,23 @@ const view = (state, actions) => (
           {renderQueue(state.queuers, actions.toggleModal)}
         </div>
       }
-      <AddButton isOpen={state.openModal} toggleModal={actions.toggleModal} />
+      <AddButton id="add-button" isOpen={state.isModalOpen} toggleModal={actions.toggleModal} />
       <Modal
-        isOpen={state.openModal}
+        isOpen={state.isModalOpen}
+        isNewModal={state.isNewModalOpen}
         toggleModal={actions.toggleModal}
-        queuer={state.currentQueuer}
+        title={state.name}
+        name={state.name}
+        onNameChange={actions.setName}
+        party={state.party}
+        onPartyChange={actions.setParty}
+        number={state.number}
+        onNumberChange={actions.setNumber}
+        notes={state.notes}
+        onNotesChange={actions.setNotes}
+        onButtonClick={state.isNewModalOpen ? actions.saveQueuer : actions.updateQueuer}
+        onSeatClick={actions.seatQueuer}
+        onRemoveClick={actions.removeQueuer}
       />
     </section>
   </main>
