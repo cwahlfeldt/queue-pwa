@@ -30,9 +30,11 @@ const state = {
 const actions = {
   // init for the entire apps data and or dom manipulations
   init: () => (state, actions) => {
-    //actions.setQueuers(DATA)
     actions.fetchQueuers()
   },
+
+  // set the queuers this is used alot
+  setQueuers: queuers => state => ({queuers}),
 
   // fetch queuers from localstorage or set to empty array if none are found
   fetchQueuers: () => (state, actions) => {
@@ -51,8 +53,6 @@ const actions = {
       console.log(err)
     })
   },
-  setQueuers: queuers => state => ({queuers}),
-  setCurrentId: currentId => state => ({currentId}),
 
   // switch save and edit modals
   toggleModal: (queuer) => (state, actions) => {
@@ -121,15 +121,29 @@ const actions = {
     })
   },
 
-  updateQueuer: () => {
-    console.log('updating queuer')
+  updateQueuer: () => (state, actions) => {
+    const pos = state.queuers.findIndex(obj => obj.id === state.id)
+    const queuers = state.queuers
+
+    queuers[pos].name = state.name
+    queuers[pos].party = state.party
+    queuers[pos].number = state.number
+    queuers[pos].notes = state.notes
+
+    localforage.setItems('queuers', queuers)
+      .then(data => {
+        actions.setQueuers(data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   },
 
   removeQueuer: () => (state, actions) => {
-    const newQueuers = state.queuers.filter(queuer => queuer.id !== state.id)
-    localforage.setItem('queuers', newQueuers)
+    const queuers = state.queuers.filter(queuer => queuer.id !== state.id)
+    localforage.setItem('queuers', queuers)
       .then(data => {
-        actions.setQueuers(newQueuers)
+        actions.setQueuers(data)
       })
       .catch(err => {
         console.log(err)
@@ -137,7 +151,14 @@ const actions = {
   },
 
   seatQueuer: () => {
-    console.log('seat queuer')
+    const queuers = state.queuers.filter(queuer => queuer.id !== state.id)
+    localforage.setItem('queuers', queuers)
+      .then(data => {
+        actions.setQueuers(data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   },
 
   nullifyFields: () => state => ({
@@ -146,7 +167,6 @@ const actions = {
     party: '',
     number: '',
     notes: '',
-    currentQueuer: '',
   }),
 
   // all input setters
