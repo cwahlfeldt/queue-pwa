@@ -16,25 +16,11 @@ import './lib/vars.css'
 
 const DATA = queuers
 
-  /*
-
-            {
-              id: shortid.generate(),
-              name: 'Chris',
-              party_size: 3,
-              phone_number: '2178675309',
-              notes: 'cool bro',
-              entry: '2018-07-13T16:15:55.842Z',
-              end: null,
-              deleted: false,
-              completed: false,
-            }
-            */
-
 const state = {
   queuers: null,
   isNewModalOpen: true,
   isModalOpen: false,
+  id: '',
   name: '',
   party: '',
   number: '',
@@ -48,17 +34,16 @@ const actions = {
     actions.fetchQueuers()
   },
 
+  // fetch queuers from localstorage or set to empty array if none are found
   fetchQueuers: () => (state, actions) => {
     localforage.getItem('queuers')
     .then(val => {
       if (val === null) {
         localforage.setItem('queuers', [])
-        .then(data => {
-          console.log(data)
-          actions.setQueuers(data)
-        })
+          .then(data => {
+            actions.setQueuers(data)
+          })
       } else {
-        console.log(val)
         actions.setQueuers(val)
       }
     })
@@ -66,9 +51,8 @@ const actions = {
       console.log(err)
     })
   },
-
-  // TODO: set to real data
-  setQueuers: data => state => ({queuers: data}),
+  setQueuers: queuers => state => ({queuers}),
+  setCurrentId: currentId => state => ({currentId}),
 
   // switch save and edit modals
   toggleModal: (queuer) => (state, actions) => {
@@ -96,7 +80,8 @@ const actions = {
       return {isModalOpen: !state.isModalOpen}
     }
   },
-  setCurrentQueuer: ({name, party_size, phone_number, notes}) => state => ({
+  setCurrentQueuer: ({id, name, party_size, phone_number, notes}) => state => ({
+    id,
     name,
     party: party_size,
     number: phone_number,
@@ -140,8 +125,15 @@ const actions = {
     console.log('updating queuer')
   },
 
-  removeQueuer: () => {
-    console.log('remove queuer')
+  removeQueuer: () => (state, actions) => {
+    const newQueuers = state.queuers.filter(queuer => queuer.id !== state.id)
+    localforage.setItem('queuers', newQueuers)
+      .then(data => {
+        actions.setQueuers(newQueuers)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   },
 
   seatQueuer: () => {
@@ -149,6 +141,7 @@ const actions = {
   },
 
   nullifyFields: () => state => ({
+    id: '',
     name: '',
     party: '',
     number: '',
@@ -165,7 +158,7 @@ const actions = {
 
 const renderQueue = (queuers, toggleModal) => (
   queuers.map((queuer, index) => (
-    <div onclick={() => toggleModal(queuer)} class="pointer">
+    <div key={queuer.id} onclick={() => toggleModal(queuer)} class="pointer">
       {!queuer.end &&
         <div class="flex flex-row ph4 mv2 bg-white shadow-1 br2 items-center">
           <h4 class="index avenir black fw5 f4 w3 counter"></h4>
