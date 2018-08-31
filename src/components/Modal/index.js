@@ -2,7 +2,7 @@ import { h } from 'hyperapp'
 
 const Modal = ({
   isOpen = false,
-  title = '',
+  title = 'Add New',
   timeWaiting = null,
   status = null,
   name = false,
@@ -39,7 +39,7 @@ const Modal = ({
         left-0 ph5 pt4 pb5 z-2 shadow-1
       `}
     >
-      <h1 class="avenir fw5 f2 tracked mb0">{title}</h1>
+      <h1 class="avenir fw5 f2 tracked mb0">{title || 'Add New'}</h1>
       <div class="meta mb3 flex flex-row">
         {timeWaiting !== null &&
           <p class="time avenir f5 fw2"></p>
@@ -50,13 +50,13 @@ const Modal = ({
       </div>
       <form>
         <label for="name" class="ttu avenir f6 fw2">Name</label>
-        <input name="name" class="ba b--light-gray pa2 br2 mb3 db w-100 avenir f4" oninput={onNameChange} type="text" value={name || ''} />
+        <input tabindex="1" name="name" class="ba b--light-gray pa2 br2 mb3 db w-100 avenir f4" autofocus type="text" value={name || ''} />
         <label for="party" class="ttu avenir f6 fw2">Party of</label>
-        <input name="party" class="ba b--light-gray pa2 br2 mb3 db w-100 avenir f4" oninput={onPartyChange} type="text" value={party || ''} />
+        <input tabindex="2" name="party" class="ba b--light-gray pa2 br2 mb3 db w-100 avenir f4" oninput={onPartyChange} type="tel" value={party || ''} />
         <label for="number" class="ttu avenir f6 fw2">Phone Number</label>
-        <input name="number" class="ba b--light-gray pa2 mb3 br2 w-100 avenir f4" oninput={onNumberChange} type="text" value={number || ''} />
+        <input tabindex="3" name="number" class="ba b--light-gray pa2 mb3 br2 w-100 avenir f4" oninput={onNumberChange} type="tel" value={number || ''} />
         <label for="notes" class="ttu avenir f6 fw2">Notes</label>
-        <textarea name="notes" class="ba b--light-gray pa2 br2 db w-100 h4 avenir f4" oninput={onNotesChange} value={notes || ''}></textarea>
+        <textarea tabindex="4" name="notes" class="ba b--light-gray pa2 br2 db w-100 h4 avenir f4" oninput={onNotesChange} value={notes || ''}></textarea>
         {!isNewModal &&
           <div class="flex flex-row">
             <button

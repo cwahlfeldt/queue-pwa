@@ -2,7 +2,6 @@
 // main app file
 
 import { h, app } from 'hyperapp'
-import { queuers } from './lib/mockdata.yml'
 import Nav from './components/Nav'
 import AddButton from './components/AddButton'
 import Modal from './components/Modal'
@@ -13,8 +12,6 @@ import shortid from 'shortid'
 import 'tachyons-custom'
 import './lib/style.css'
 import './lib/vars.css'
-
-const DATA = queuers
 
 const state = {
   queuers: null,
@@ -126,11 +123,13 @@ const actions = {
     const queuers = state.queuers
 
     queuers[pos].name = state.name
-    queuers[pos].party = state.party
-    queuers[pos].number = state.number
+    queuers[pos].party_size = state.party
+    queuers[pos].phone_number = state.number
     queuers[pos].notes = state.notes
 
-    localforage.setItems('queuers', queuers)
+    console.log(queuers)
+
+    localforage.setItem('queuers', queuers)
       .then(data => {
         actions.setQueuers(data)
       })
@@ -170,7 +169,7 @@ const actions = {
   }),
 
   // all input setters
-  setName: ({target}) => state => ({name: target.value.trim()}),
+  setName: ({target}) => state => ({name: target.value}),
   setParty: ({target}) => state => ({party: target.value.trim()}),
   setNumber: ({target}) => state => ({number: target.value.trim()}),
   setNotes: ({target}) => state => ({notes: target.value}),
@@ -196,6 +195,7 @@ const view = (state, actions) => (
     oncreate={actions.init}
     class="vw-100 h-100 bg-light-gray pr5"
   >
+    <div style={{height: '21px'}} class="bg-black-20 absolute top-0 left-0 w-100"></div>
     <section class="outer flex flex-row counter-reset">
       <Nav />
       {state.queuers !== null &&
