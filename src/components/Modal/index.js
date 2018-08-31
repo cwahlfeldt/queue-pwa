@@ -50,7 +50,7 @@ const Modal = ({
       </div>
       <form>
         <label for="name" class="ttu avenir f6 fw2">Name</label>
-        <input tabindex="1" name="name" class="ba b--light-gray pa2 br2 mb3 db w-100 avenir f4" autofocus type="text" value={name || ''} />
+        <input tabindex="1" name="name" class="ba b--light-gray pa2 br2 mb3 db w-100 avenir f4" oninput={onNameChange} type="text" value={name || ''} />
         <label for="party" class="ttu avenir f6 fw2">Party of</label>
         <input tabindex="2" name="party" class="ba b--light-gray pa2 br2 mb3 db w-100 avenir f4" oninput={onPartyChange} type="tel" value={party || ''} />
         <label for="number" class="ttu avenir f6 fw2">Phone Number</label>
