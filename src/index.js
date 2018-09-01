@@ -8,6 +8,7 @@ import Modal from './components/Modal'
 import moment from 'moment'
 import localforage from 'localforage'
 import shortid from 'shortid'
+import { twilio } from './lib/util'
 
 import 'tachyons-custom'
 import './lib/style.css'
@@ -93,6 +94,12 @@ const actions = {
     return {isModalOpen: !state.isModalOpen}
   },
 
+  textQueuer: (message) => (state) => {
+    twilio(state.number, message)
+      .then(resp => console.log(resp))
+      .catch(err => console.log(err))
+  },
+
   saveQueuer: () => (state, actions) => {
     localforage.setItem('queuers',
       [
@@ -106,11 +113,13 @@ const actions = {
           entry: moment().toISOString(),
           end: false,
           deleted: false,
-          completed: false,
-        },
+          seated: false,
+          texted: false,
+        }
       ]
     ).then(data => {
       actions.setQueuers(data)
+      actions.textQueuer(`Thanks ${state.name}! You will recieve another message when your table is ready.`)
       actions.nullifyFields()
     }).catch(err => {
       console.log(err)
@@ -127,7 +136,6 @@ const actions = {
     queuers[pos].phone_number = state.number
     queuers[pos].notes = state.notes
 
-    console.log(queuers)
 
     localforage.setItem('queuers', queuers)
       .then(data => {
@@ -139,18 +147,30 @@ const actions = {
   },
 
   removeQueuer: () => (state, actions) => {
+    const pos = state.queuers.findIndex(obj => obj.id === state.id)
     const queuers = state.queuers.filter(queuer => queuer.id !== state.id)
+
     localforage.setItem('queuers', queuers)
       .then(data => {
         actions.setQueuers(data)
+        setTimeout(() => {
+          actions.nullifyFields()
+        }, 300)
       })
       .catch(err => {
         console.log(err)
       })
   },
 
-  seatQueuer: () => {
-    const queuers = state.queuers.filter(queuer => queuer.id !== state.id)
+  seatQueuer: () => (state, actions) => {
+    const pos = state.queuers.findIndex(obj => obj.id === state.id)
+    const queuers = state.queuers
+
+    //queuers[pos].end = moment().toISOString()
+    queuers[pos].seated = true
+
+    console.log(queuers)
+
     localforage.setItem('queuers', queuers)
       .then(data => {
         actions.setQueuers(data)
@@ -203,7 +223,7 @@ const view = (state, actions) => (
           {state.queuers.map((queuer, index) => (
             <div onclick={() => actions.toggleModal(queuer)} class="pointer">
               {!queuer.end &&
-                <div class="flex flex-row ph4 mv2 bg-white shadow-1 br2 items-center">
+                <div class={`flex flex-row ph4 mv2 ${queuer.seated ? 'bg-light-blue' : 'bg-white'} shadow-1 br2 items-center`}>
                   <h4 class="index avenir black fw5 f4 w3 counter"></h4>
                   <h4 class="name avenir black fw3 f4 w5">{queuer.name}</h4>
                   <h4 class="name avenir black fw4 f4 w3 pv3 ml-auto tc">{queuer.party_size}</h4>

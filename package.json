@@ -21,6 +21,7 @@
     "postcss": "^7.0.0",
     "postcss-modules": "^1.1.0",
     "postcss-preset-env": "^5.2.2",
+    "query-string": "^6.1.0",
     "shortid": "^2.2.13",
     "style.css": "^1.0.0",
     "tachyons-custom": "^4.9.5"
