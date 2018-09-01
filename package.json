@@ -15,6 +15,7 @@
   "dependencies": {
     "@hyperapp/router": "^0.7.0",
     "autoprefixer": "^8.6.5",
+    "firebase": "^5.4.2",
     "hyperapp": "^1.2.6",
     "localforage": "^1.7.2",
     "moment": "^2.22.2",
