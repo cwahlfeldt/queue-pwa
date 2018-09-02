@@ -1,8 +1,8 @@
 {
-  "short_name": "hyperapp-pwa",
-  "name": "Hyperapp progressive web app template",
-  "description": "A minimalist progressive web app compliant template for hyperapp projects",
-  "display": "standalone",
+  "short_name": "Queue",
+  "name": "Queue App",
+  "description": "Hosting with the mosting!",
+  "display": "fullscreen",
   "scope": "/",
   "start_url": "/",
   "theme_color": "white",
