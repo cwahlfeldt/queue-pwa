@@ -28,16 +28,17 @@ const Modal = ({
       ${isOpen ? 'o-100 vis-v' : 'o-0 vis-h'}
       modal w-100 h-100
       fixed z-1 flex flex-column
-      justify items-center
+      justify-center items-center
     `}
   >
     <div
       onclick={toggleModal}
       class={`
         bg-black-70 absolute w-100 h-100 z-1
-      `}>
-    </div>
+      `}
+    ></div>
     <div
+      style={{marginTop: '-20px'}}
       class={`
         ${isOpen ? 'translate-100' : 'translate-0'}
         form-wrap mw7 w-100 center

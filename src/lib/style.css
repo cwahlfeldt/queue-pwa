@@ -84,3 +84,15 @@ h4 {
 .translate-100 {
   transform: translate3d(0, 0, 0);
 }
+
+.toast {
+  transition: all 200ms ease-in-out;
+}
+
+.anim-in {
+  transform: translate3d(0, 0, 0);
+}
+
+.anim-out {
+  transform: translate3d(-200px, 0, 0);
+}

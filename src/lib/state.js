@@ -24,6 +24,10 @@ export const state = {
   party: '',
   number: '',
   notes: '',
+  showToast: false,
+  toastTitle: '',
+  toastMessage: '',
+  toastType: '',
 }
 
 export const actions = {
@@ -37,6 +41,22 @@ export const actions = {
     })
   },
 
+  // toast functionality
+  toast: ({title, message, type}) => (state, actions) => {
+    setTimeout(() => {
+      actions.setToast({title, message, type})
+      actions.toggleToast()
+    }, 300)
+    setTimeout(() => {
+      actions.toggleToast()
+      setTimeout(() => {
+        actions.setToast({title: '', message: '', type: ''})
+      }, 200)
+    }, 3000)
+  },
+  toggleToast: () => state => ({showToast: !state.showToast}),
+  setToast: ({title, message, type}) => state => ({toastTitle: title, toastMessage: message, toastType: type}),
+
   // set the queuers this is used alot
   setQueuers: queuers => state => ({queuers}),
 
@@ -47,15 +67,26 @@ export const actions = {
         actions.nullifyLoginFields()
         actions.setIsLoggedIn(true)
       })
-      .catch(err => console.error(err.message))
+      .catch(err => {
+        actions.toast({
+          title: 'Error',
+          message: err.message,
+          type: 'error',
+        })
+        console.error(err.message)
+      })
   },
 
   logout: () => (state, actions) => {
     firebase.auth().signOut().then(() => {
       actions.nullifyLoginFields()
       actions.setIsLoggedIn(false)
-    }).catch((error) => {
-      console.error(error.message)
+    }).catch(err => {
+      actions.toast({
+        title: 'Error',
+        message: err.message,
+        type: 'error',
+      })
     });
   },
 
@@ -167,6 +198,7 @@ export const actions = {
     ).then(data => {
       actions.setQueuers(data)
       actions.textQueuer(`Thanks ${state.name}! You will recieve another message when your table is ready.`)
+      actions.toast({title: 'Success', message: `Added ${state.name}`, type: 'success'})
       actions.nullifyFields()
     }).catch(err => {
       console.log(err)

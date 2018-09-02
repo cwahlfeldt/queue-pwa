@@ -9,5 +9,10 @@
   "background_color": "#fff",
   "orientation": "portrait",
   "dir": "ltr",
-  "lang": "en"
+  "lang": "en",
+  "icons": [{
+    "src": "./apple-touch-icon.png",
+    "sizes": "180x180",
+    "type": "image/png"
+  }]
 }

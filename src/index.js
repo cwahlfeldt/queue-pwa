@@ -6,6 +6,7 @@ import { actions, state } from './lib/state'
 import Nav from './components/Nav'
 import AddButton from './components/AddButton'
 import Modal from './components/Modal'
+import Toast from './components/Toast'
 import 'tachyons-custom'
 import './lib/style.css'
 import './lib/vars.css'
@@ -30,6 +31,7 @@ const view = (state, actions) => (
     oncreate={actions.init}
     class="vw-100 h-100 bg-light-gray"
   >
+    <Toast show={state.showToast} title={state.toastTitle} message={state.toastMessage} type={state.toastType} />
     <div style={{height: '21px'}} class="bg-black-20 fixed top-0 left-0 w-100"></div>
     {!state.isLoggedIn &&
       <section style={{maxWidth: '400px', marginTop: '-50px'}} class="w-100 login flex flex-column justify-center items-center vh-100 w-100 center">
