@@ -10,21 +10,23 @@
   "author": "cwahlfeldt",
   "license": "ISC",
   "devDependencies": {
-    "parcel": "^1.9.7"
+    "babel-core": "^6.26.3",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "parcel": "^1.11.0"
   },
   "dependencies": {
-    "@hyperapp/router": "^0.7.0",
-    "autoprefixer": "^8.6.5",
-    "firebase": "^5.4.2",
-    "hyperapp": "^1.2.6",
-    "localforage": "^1.7.2",
-    "moment": "^2.22.2",
-    "postcss": "^7.0.0",
-    "postcss-modules": "^1.1.0",
-    "postcss-preset-env": "^5.2.2",
-    "query-string": "^6.1.0",
-    "shortid": "^2.2.13",
+    "@hyperapp/router": "^0.7.1",
+    "autoprefixer": "^9.4.9",
+    "firebase": "^5.8.5",
+    "hyperapp": "^1.2.9",
+    "localforage": "^1.7.3",
+    "moment": "^2.24.0",
+    "postcss": "^7.0.14",
+    "postcss-modules": "^1.4.1",
+    "postcss-preset-env": "^6.6.0",
+    "query-string": "^6.2.0",
+    "shortid": "^2.2.14",
     "style.css": "^1.0.0",
-    "tachyons-custom": "^4.9.5"
+    "tachyons-custom": "^4.9.6"
   }
 }
