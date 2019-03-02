@@ -4,6 +4,7 @@ import shortid from 'shortid'
 import { twilio } from './util'
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import { location, Link } from "@hyperapp/router"
 
 // init firebase
 firebase.initializeApp({
@@ -28,6 +29,7 @@ export const state = {
   toastTitle: '',
   toastMessage: '',
   toastType: '',
+  location: location.state,
 }
 
 export const actions = {
@@ -40,6 +42,8 @@ export const actions = {
       }
     })
   },
+
+  location: location.actions,
 
   // toast functionality
   toast: ({title, message, type}) => (state, actions) => {
@@ -81,6 +85,7 @@ export const actions = {
     firebase.auth().signOut().then(() => {
       actions.nullifyLoginFields()
       actions.setIsLoggedIn(false)
+      actions.location.go('/')
     }).catch(err => {
       actions.toast({
         title: 'Error',
@@ -88,6 +93,10 @@ export const actions = {
         type: 'error',
       })
     });
+  },
+
+  settings: () => (state, actions) => {
+    location.go('/settings')
   },
 
   nullifyLoginFields: () => state => ({
