@@ -3,6 +3,8 @@ import { Route } from "@hyperapp/router"
 import Home from '../routes/Home'
 import Settings from '../routes/Settings'
 import Nav from '../components/Nav'
+import AddButton from '../components/AddButton'
+import Modal from '../components/Modal'
 import Toast from '../components/Toast'
 
 const App = (
@@ -41,6 +43,38 @@ const App = (
           Log In
         </h4>
       </section>
+    }
+
+    {state.isLoggedIn &&
+      <AddButton
+        id="add-button"
+        goHome={actions.home}
+        isOpen={state.isModalOpen}
+        toggleModal={actions.toggleModal}
+      />
+    }
+
+    {state.isLoggedIn &&
+      <Modal
+        isOpen={state.isModalOpen}
+        isNewModal={state.isNewModalOpen}
+        toggleModal={actions.toggleModal}
+        title={state.name}
+        name={state.name}
+        onNameChange={actions.setName}
+        party={state.party}
+        onPartyChange={actions.setParty}
+        number={state.number}
+        onNumberChange={actions.setNumber}
+        notes={state.notes}
+        onNotesChange={actions.setNotes}
+        onButtonClick={
+          state.isNewModalOpen ? actions.saveQueuer : actions.updateQueuer
+        }
+        onSeatClick={actions.seatQueuer}
+        onTextClick={actions.onTextQueuer}
+        onRemoveClick={actions.removeQueuer}
+      />
     }
 
     {state.isLoggedIn &&

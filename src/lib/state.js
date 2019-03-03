@@ -140,7 +140,14 @@ export const actions = {
 
   // switch save and edit modals
   toggleModal: queuer => (state, actions) => {
-    if (queuer.target !== undefined || queuer === '') {
+    if (queuer === undefined) {
+      actions.toggleAddModal();
+      setTimeout(() => {
+        actions.setModalToggle(true);
+      }, 300)
+      return
+    }
+    if ((queuer.target !== undefined) || queuer === '') {
       actions.toggleAddModal();
       setTimeout(() => {
         actions.setModalToggle(true);
@@ -156,21 +163,23 @@ export const actions = {
   toggleEditModal: currentQueuer => (state, actions) => {
     if (state.name !== '' && state.isModalOpen) {
       setTimeout(() => {
-        actions.setCurrentQueuer('');
+        actions.setCurrentQueuer('')
       }, 300);
-      return {isModalOpen: !state.isModalOpen};
+      return {isModalOpen: !state.isModalOpen}
     } else {
-      actions.setCurrentQueuer(currentQueuer);
-      return {isModalOpen: !state.isModalOpen};
+      actions.setCurrentQueuer(currentQueuer)
+      return {isModalOpen: !state.isModalOpen}
     }
   },
-  setCurrentQueuer: ({id, name, party_size, phone_number, notes}) => state => ({
-    id,
-    name,
-    party: party_size,
-    number: phone_number,
-    notes,
-  }),
+  setCurrentQueuer: (data) => state => {
+    return {
+      id: data.id,
+      name: data.name,
+      party: data.party_size,
+      number: data.phone_number,
+      notes: data.notes,
+    }
+  },
 
   // toggles the save new modal
   toggleAddModal: () => (state, actions) => {

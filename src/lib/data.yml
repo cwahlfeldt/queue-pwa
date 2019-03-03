@@ -1,0 +1,76 @@
+#
+# data will only save when leaving or starting
+# the app. it will hydrate localforage on
+# every login/visit to the app
+# 
+
+[
+
+  #user 1
+  {
+    user_name: "waffles",
+    user_id: "69420fuki",
+    signup_date: "20190303",
+    trial_end: "20190310",
+    paid: false,
+    queuers: [
+      {
+        name: 'Chris',
+        party_size: 3,
+        phone_number: '2178675309',
+        notes: 'cool bro',
+        entry: '2018-07-13T16:15:55.842Z',
+        end: '2018-07-13T16:34:55.842Z',
+        deleted: false,
+        completed: false,
+      },
+      {
+        name: 'Rachel',
+        party_size: 3,
+        phone_number: '2178675309',
+        notes: 'cool bro',
+        entry: '2018-07-13T16:15:55.842Z',
+        end: '2018-07-13T16:34:55.842Z',
+        deleted: false,
+        completed: false,
+      },
+      #...
+    ],
+  },
+
+  #user 2
+  {
+    user_name: "rwahlfeldt",
+    user_id: "69420fuki",
+    signup_date: "20190303",
+    trial_end: "20190310",
+    paid: false,
+    queuers: [
+      {
+        name: 'Chris',
+        party_size: 3,
+        phone_number: '2178675309',
+        notes: 'cool bro',
+        entry: '2018-07-13T16:15:55.842Z',
+        end: '2018-07-13T16:34:55.842Z',
+        deleted: false,
+        completed: false,
+      },
+      {
+        name: 'Rachel',
+        party_size: 3,
+        phone_number: '2178675309',
+        notes: 'cool bro',
+        entry: '2018-07-13T16:15:55.842Z',
+        end: '2018-07-13T16:34:55.842Z',
+        deleted: false,
+        completed: false,
+      },
+    ]
+  }
+  #
+  #
+  #
+  #
+  #...
+]

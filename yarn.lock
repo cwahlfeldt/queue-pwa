@@ -4039,6 +4039,11 @@ physical-cpu-count@^2.0.0:
   resolved "https://registry.yarnpkg.com/physical-cpu-count/-/physical-cpu-count-2.0.0.tgz#18de2f97e4bf7a9551ad7511942b5496f7aba660"
   integrity sha1-GN4vl+S/epVRrXURlCtUlverpmA=
 
+picostyle@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/picostyle/-/picostyle-2.1.2.tgz#f8ac464d1c24c33c763d2cdb584b65c652a61b51"
+  integrity sha512-rQGIsJRAeq0hUdd7525SNvbQkj4CpPj9FGmMmg3sROE501OM0j5+mdD7q70eDGfpneeEuVN/6V7E7SMzuhWTuA==
+
 posix-character-classes@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"

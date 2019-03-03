@@ -1,15 +1,16 @@
 import {h} from 'hyperapp';
-import AddButton from '../../components/AddButton';
-import Modal from '../../components/Modal';
+//import AddButton from '../../components/AddButton';
+//import Modal from '../../components/Modal';
+import Container from '../../components/Container';
 
 const Home = ({state, actions}) => (
   <section oncreate={actions.init} class="home vw-100 h-100 bg-light-gray">
     {state.isLoggedIn && (
       <section class="app flex flex-row counter-reset pt0">
         {state.queuers !== null && (
-          <div
+          <Container
             style={{marginTop: '11px'}}
-            class={`queue list flex flex-column mw6 w-100 center pb4 pt4`}>
+          >
             {state.queuers.map(queuer => (
               <div onclick={() => actions.toggleModal(queuer)} class="pointer">
                 {!queuer.end && (
@@ -31,8 +32,9 @@ const Home = ({state, actions}) => (
                 )}
               </div>
             ))}
-          </div>
+          </Container>
         )}
+        {/*
         <AddButton
           id="add-button"
           isOpen={state.isModalOpen}
@@ -58,6 +60,7 @@ const Home = ({state, actions}) => (
           onTextClick={actions.onTextQueuer}
           onRemoveClick={actions.removeQueuer}
         />
+        */}
       </section>
     )}
   </section>
