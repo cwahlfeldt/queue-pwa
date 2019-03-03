@@ -4,14 +4,14 @@ import Modal from '../../components/Modal'
 
 const Home = ({
   state,
-  actions
+  actions,
 }) => (
   <section
     oncreate={actions.init}
     class="home vw-100 h-100 bg-light-gray"
   >
     {state.isLoggedIn &&
-      <section class="app flex flex-row counter-reset pr5">
+      <section class="app flex flex-row counter-reset">
         {state.queuers !== null &&
           <div style={{marginTop: '11px'}} class={`queue list flex flex-column mw6 w-100 center pb4 pt4`}>
             {state.queuers.map((queuer) => (

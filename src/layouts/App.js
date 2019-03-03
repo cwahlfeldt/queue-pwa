@@ -14,9 +14,11 @@ const App = (
     class="app vvw-100 h-100 bg-light-grey"
   >
     {state.isLoggedIn &&
-      <section class="main-nav">
+      <section class="main-nav fixed w-auto-ns w-100 z1">
         <Nav
           onLogOut={actions.logout}
+          onSettings={actions.settings}
+          onHome={actions.home}
         />
         <Toast show={state.showToast} title={state.toastTitle} message={state.toastMessage} type={state.toastType} />
         <div style={{height: '21px'}} class="bg-black-20 fixed top-0 left-0 w-100"></div>

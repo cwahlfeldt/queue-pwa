@@ -3,27 +3,37 @@ import { Link } from "@hyperapp/router"
 
 const Nav = ({
   onLogOut,
+  onSettings,
+  onHome,
 }) => (
-  <nav class="vh-100 sticky flex flex-column justify-between">
-    <Link
+  <nav class="vh-100 sticky flex flex-column justify-between w-100">
+    <a
       class="branding f-5 fw3 avenir green tracked lh-solid pa4 link dim"
-      to={"/"}
+      href="#"
+      onclick={e => {
+        e.preventDefault()
+        onHome()
+      }}
     >
       Q
-    </Link>
+    </a>
     <div class="menu flex flex-column pb4 br1 b--green">
       {/*<a class="green avenir f6 ttu fw5 ph4 pv3 link dim" href="#">Dashboard</a>*/}
       {/*<a class="green avenir f6 ttu fw5 ph4 pv3 link dim strike" disabled href="#">Auto Queue</a>*/}
-      <Link
+      <a
         class="green avenir f6 ttu fw5 ph4 pv3 link dim"
-        to={'/settings'}
+        href="#"
+        onclick={e => {
+          e.preventDefault()
+          onSettings()
+        }}
       >
         Settings
-      </Link>
+      </a>
       <a
         class="green pointer avenir f6 ttu fw5 ph4 pt3 link dim"
         href="#"
-        onclick={(e) => {
+        onclick={e => {
           e.preventDefault()
           onLogOut()
         }}

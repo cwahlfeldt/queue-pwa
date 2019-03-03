@@ -1,10 +1,15 @@
 body {
   background-color: var(--light-gray);
+  overflow-x: hidden;
 }
 
 h1.branding {
   margin-top: 12px;
   margin-bottom: 0;
+}
+
+.link:focus {
+  outline: none !important;
 }
 
 .button-reset {
