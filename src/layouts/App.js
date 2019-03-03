@@ -11,7 +11,7 @@ const App = (
 ) => (
   <main
     oncreate={actions.init}
-    class="app vvw-100 h-100 bg-light-grey"
+    class="app vw-100 h-100 bg-light-grey"
   >
     {state.isLoggedIn &&
       <section class="main-nav fixed w-auto-ns w-100 z1">
