@@ -8,6 +8,10 @@ h1.branding {
   margin-bottom: 0;
 }
 
+.queue.list {
+  padding-left: 100px;
+}
+
 .link:focus {
   outline: none !important;
 }

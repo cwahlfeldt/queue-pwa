@@ -14,7 +14,7 @@ const App = (
     class="app vw-100 h-100 bg-light-grey"
   >
     {state.isLoggedIn &&
-      <section class="main-nav fixed w-auto-ns w-100 z1">
+      <section class="main-nav fixed w-auto-ns z1">
         <Nav
           onLogOut={actions.logout}
           onSettings={actions.settings}

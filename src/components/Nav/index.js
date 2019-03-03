@@ -6,7 +6,7 @@ const Nav = ({
   onSettings,
   onHome,
 }) => (
-  <nav class="vh-100 sticky flex flex-column justify-between w-100">
+  <nav class="vh-100 sticky flex flex-column justify-between">
     <a
       class="branding f-5 fw3 avenir green tracked lh-solid pa4 link dim"
       href="#"
