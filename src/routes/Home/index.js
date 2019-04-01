@@ -34,33 +34,6 @@ const Home = ({state, actions}) => (
             ))}
           </Container>
         )}
-        {/*
-        <AddButton
-          id="add-button"
-          isOpen={state.isModalOpen}
-          toggleModal={actions.toggleModal}
-        />
-        <Modal
-          isOpen={state.isModalOpen}
-          isNewModal={state.isNewModalOpen}
-          toggleModal={actions.toggleModal}
-          title={state.name}
-          name={state.name}
-          onNameChange={actions.setName}
-          party={state.party}
-          onPartyChange={actions.setParty}
-          number={state.number}
-          onNumberChange={actions.setNumber}
-          notes={state.notes}
-          onNotesChange={actions.setNotes}
-          onButtonClick={
-            state.isNewModalOpen ? actions.saveQueuer : actions.updateQueuer
-          }
-          onSeatClick={actions.seatQueuer}
-          onTextClick={actions.onTextQueuer}
-          onRemoveClick={actions.removeQueuer}
-        />
-        */}
       </section>
     )}
   </section>
