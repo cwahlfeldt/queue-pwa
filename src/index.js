@@ -8,6 +8,7 @@ import { location } from '@hyperapp/router'
 import 'tachyons-custom'
 import './lib/style.css'
 import './lib/vars.css'
+import './lib/tailwind.css'
 
 const main = app(
   state,

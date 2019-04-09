@@ -1,4 +1,4 @@
-import {h} from 'hyperapp'
+import { h } from 'hyperapp'
 import { Route } from "@hyperapp/router"
 import Home from '../routes/Home'
 import Settings from '../routes/Settings'
