@@ -6,7 +6,7 @@ const Container = style('section')({
   'display'        : 'flex',
   'flex-direction' : 'column',
   'width'          : '100%',
-  'max-width'      : '32rem',
+  'max-width'      : '40rem',
   'margin-left'    : 'auto',
   'margin-right'   : 'auto',
   'padding-left'   : '100px',

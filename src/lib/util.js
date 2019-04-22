@@ -16,7 +16,6 @@ export const twilio = (phone, message) => {
     },
     method: 'POST',
     body: query,
-  })
-    .then(response => response)
+  }).then(response => response)
     .catch(err => {console.error(err)})
 }
