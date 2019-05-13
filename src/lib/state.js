@@ -1,17 +1,20 @@
-import localforage from 'localforage';
-import moment from 'moment';
-import shortid from 'shortid';
-import {twilio} from './util';
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import {location, Link} from '@hyperapp/router';
+import localforage from 'localforage'
+import moment from 'moment'
+import shortid from 'shortid'
+import {twilio} from './util'
+import firebase from 'firebase/app'
+import 'firebase/auth'
+import 'firebase/firestore'
+import { location } from '@hyperapp/router'
 
 // init firebase
 firebase.initializeApp({
   apiKey: 'AIzaSyBtY-TMXxTIvtXighdhoOdcDRu4mHyIxAY',
   authDomain: 'queue-pwa.firebaseapp.com',
   projectId: 'queue-pwa',
-});
+})
+
+
 
 export const state = {
   isLoggedIn: false,
@@ -30,17 +33,30 @@ export const state = {
   toastMessage: '',
   toastType: '',
   location: location.state,
-};
+}
 
 export const actions = {
   // init for the entire apps data and or dom manipulations
   init: () => (state, actions) => {
-    actions.fetchQueuers();
+    process.env.ENV !== `production` && console.log(state)
+    actions.fetchQueuers()
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        actions.setIsLoggedIn(true);
+        actions.setIsLoggedIn(true)
       }
-    });
+    })
+  },
+
+  initSettings: async () => {
+    const fstr = firebase.firestore()
+    return await fstr.collection("model-1")
+      .get() // get it!
+      .then(async querySnapshot => {
+        querySnapshot.forEach(doc => {
+          console.log(`${doc.id} => ${doc.data()}`);
+        })
+        return querySnapshot
+      })
   },
 
   location: location.actions,
@@ -48,18 +64,19 @@ export const actions = {
   // toast functionality
   toast: ({title, message, type}) => (state, actions) => {
     setTimeout(() => {
-      actions.setToast({title, message, type});
-      actions.toggleToast();
-    }, 300);
+      process.env.ENV !== `production` && console.log(state)
+      actions.setToast({title, message, type})
+      actions.toggleToast()
+    }, 300)
     setTimeout(() => {
-      actions.toggleToast();
+      actions.toggleToast()
       setTimeout(() => {
-        actions.setToast({title: '', message: '', type: ''});
-      }, 200);
-    }, 3000);
+        actions.setToast({title: '', message: '', type: ''})
+      }, 200)
+    }, 3000)
   },
   toggleToast: () => state => ({showToast: !state.showToast}),
-  setToast: ({title, message, type}) => state => ({
+  setToast: ({title, message, type}) => () => ({
     toastTitle: title,
     toastMessage: message,
     toastType: type,
@@ -69,7 +86,7 @@ export const actions = {
   setQueuers: queuers => state => ({queuers}),
 
   home: () => (state, actions) => {
-    actions.location.go('/');
+    actions.location.go('/')
   },
 
   // login the user
@@ -77,40 +94,40 @@ export const actions = {
     firebase
       .auth()
       .signInWithEmailAndPassword(state.email, state.password)
-      .then(resp => {
-        actions.nullifyLoginFields();
-        actions.setIsLoggedIn(true);
+      .then(() => {
+        actions.nullifyLoginFields()
+        actions.setIsLoggedIn(true)
       })
       .catch(err => {
         actions.toast({
           title: 'Error',
           message: err.message,
           type: 'error',
-        });
-        console.error(err.message);
-      });
+        })
+        console.error(err.message)
+      })
   },
 
-  logout: () => (state, actions) => {
+  logout: () => actions => {
     firebase
       .auth()
       .signOut()
       .then(() => {
-        actions.nullifyLoginFields();
-        actions.setIsLoggedIn(false);
-        actions.location.go('/');
+        actions.nullifyLoginFields()
+        actions.setIsLoggedIn(false)
+        actions.location.go('/')
       })
       .catch(err => {
         actions.toast({
           title: 'Error',
           message: err.message,
           type: 'error',
-        });
-      });
+        })
+      })
   },
 
   settings: () => (state, actions) => {
-    actions.location.go('/settings');
+    actions.location.go('/settings')
   },
 
   nullifyLoginFields: () => state => ({
@@ -127,34 +144,34 @@ export const actions = {
       .then(val => {
         if (val === null) {
           localforage.setItem('queuers', []).then(data => {
-            actions.setQueuers(data);
-          });
+            actions.setQueuers(data)
+          })
         } else {
-          actions.setQueuers(val);
+          actions.setQueuers(val)
         }
       })
       .catch(err => {
-        console.log(err);
-      });
+        console.log(err)
+      })
   },
 
   // switch save and edit modals
   toggleModal: queuer => (state, actions) => {
     if (queuer === undefined) {
-      actions.toggleAddModal();
+      actions.toggleAddModal()
       setTimeout(() => {
-        actions.setModalToggle(true);
+        actions.setModalToggle(true)
       }, 300)
       return
     }
     if ((queuer.target !== undefined) || queuer === '') {
-      actions.toggleAddModal();
+      actions.toggleAddModal()
       setTimeout(() => {
-        actions.setModalToggle(true);
-      }, 300);
+        actions.setModalToggle(true)
+      }, 300)
     } else {
-      actions.toggleEditModal(queuer);
-      actions.setModalToggle(false);
+      actions.toggleEditModal(queuer)
+      actions.setModalToggle(false)
     }
   },
   setModalToggle: isNewModalOpen => state => ({isNewModalOpen}),
@@ -164,7 +181,7 @@ export const actions = {
     if (state.name !== '' && state.isModalOpen) {
       setTimeout(() => {
         actions.setCurrentQueuer('')
-      }, 300);
+      }, 300)
       return {isModalOpen: !state.isModalOpen}
     } else {
       actions.setCurrentQueuer(currentQueuer)
@@ -184,33 +201,33 @@ export const actions = {
   // toggles the save new modal
   toggleAddModal: () => (state, actions) => {
     setTimeout(() => {
-      actions.nullifyFields();
-    }, 300);
-    return {isModalOpen: !state.isModalOpen};
+      actions.nullifyFields()
+    }, 300)
+    return {isModalOpen: !state.isModalOpen}
   },
 
   textQueuer: message => state => {
-    if (state.number === '') return;
+    if (state.number === '') return
     twilio(state.number, message)
       .then(resp => console.log(resp))
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
   },
 
   onTextQueuer: message => (state, actions) => {
-    const pos = state.queuers.findIndex(obj => obj.id === state.id);
-    const queuers = state.queuers;
+    const pos = state.queuers.findIndex(obj => obj.id === state.id)
+    const queuers = state.queuers
 
-    queuers[pos].texted = true;
+    queuers[pos].texted = true
 
     localforage
       .setItem('queuers', queuers)
       .then(data => {
-        actions.setQueuers(data);
+        actions.setQueuers(data)
         actions.textQueuer(
           'Your table is ready! Please see the host for more details.',
-        );
+        )
       })
-      .catch(err => console.error(err));
+      .catch(err => console.error(err))
   },
 
   saveQueuer: () => (state, actions) => {
@@ -231,78 +248,78 @@ export const actions = {
         },
       ])
       .then(data => {
-        actions.setQueuers(data);
+        actions.setQueuers(data)
         actions.textQueuer(
           `Thanks ${
             state.name
           }! You will recieve another message when your table is ready.`,
-        );
+        )
         actions.toast({
           title: 'Success',
           message: `Added ${state.name}`,
           type: 'success',
-        });
-        actions.nullifyFields();
+        })
+        actions.nullifyFields()
       })
       .catch(err => {
-        console.log(err);
-        actions.nullifyFields();
-      });
+        console.log(err)
+        actions.nullifyFields()
+      })
   },
 
   updateQueuer: () => (state, actions) => {
-    const pos = state.queuers.findIndex(obj => obj.id === state.id);
-    const queuers = state.queuers;
+    const pos = state.queuers.findIndex(obj => obj.id === state.id)
+    const queuers = state.queuers
 
-    queuers[pos].name = state.name;
-    queuers[pos].party_size = state.party;
-    queuers[pos].phone_number = state.number;
-    queuers[pos].notes = state.notes;
+    queuers[pos].name = state.name
+    queuers[pos].party_size = state.party
+    queuers[pos].phone_number = state.number
+    queuers[pos].notes = state.notes
 
     localforage
       .setItem('queuers', queuers)
       .then(data => {
-        actions.setQueuers(data);
+        actions.setQueuers(data)
       })
       .catch(err => {
-        console.log(err);
-      });
+        console.log(err)
+      })
   },
 
   removeQueuer: () => (state, actions) => {
-    const pos = state.queuers.findIndex(obj => obj.id === state.id);
-    const queuers = state.queuers.filter(queuer => queuer.id !== state.id);
+    const pos = state.queuers.findIndex(obj => obj.id === state.id)
+    const queuers = state.queuers.filter(queuer => queuer.id !== state.id)
 
     localforage
       .setItem('queuers', queuers)
       .then(data => {
-        actions.setQueuers(data);
+        actions.setQueuers(data)
         setTimeout(() => {
-          actions.nullifyFields();
-        }, 300);
+          actions.nullifyFields()
+        }, 300)
       })
       .catch(err => {
-        console.log(err);
-      });
+        console.log(err)
+      })
   },
 
   seatQueuer: () => (state, actions) => {
-    const pos = state.queuers.findIndex(obj => obj.id === state.id);
-    const queuers = state.queuers;
+    const pos = state.queuers.findIndex(obj => obj.id === state.id)
+    const queuers = state.queuers
 
     //queuers[pos].end = moment().toISOString()
-    queuers[pos].seated = true;
+    queuers[pos].seated = true
 
-    console.log(queuers);
+    console.log(queuers)
 
     localforage
       .setItem('queuers', queuers)
       .then(data => {
-        actions.setQueuers(data);
+        actions.setQueuers(data)
       })
       .catch(err => {
-        console.log(err);
-      });
+        console.log(err)
+      })
   },
 
   // reset fields
@@ -321,4 +338,4 @@ export const actions = {
   setNotes:    ({target}) => state => ({notes: target.value}),
   setEmail:    ({target}) => state => ({email: target.value}),
   setPassword: ({target}) => state => ({password: target.value}),
-};
+}
