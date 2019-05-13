@@ -14,22 +14,22 @@
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-plugin-transform-react-jsx": "^6.24.1",
-    "parcel": "^1.11.0",
+    "parcel": "^1.12.3",
     "postcss-easy-import": "^3.0.0",
-    "tailwindcss": "^1.0.0-beta.4"
+    "tailwindcss": "^0.7.4"
   },
   "dependencies": {
     "@hyperapp/router": "^0.7.1",
-    "autoprefixer": "^9.4.9",
+    "autoprefixer": "^9.5.1",
     "firebase": "^6.0.2",
     "hyperapp": "^1.2.9",
     "localforage": "^1.7.3",
     "moment": "^2.24.0",
-    "picostyle": "^2.1.2",
-    "postcss": "^7.0.14",
+    "picostyle": "^2.2.0",
+    "postcss": "^7.0.16",
     "postcss-modules": "^1.4.1",
     "postcss-preset-env": "^6.6.0",
-    "query-string": "^6.2.0",
+    "query-string": "^6.5.0",
     "shortid": "^2.2.14",
     "style.css": "^1.0.0",
     "tachyons-custom": "^4.9.6"
