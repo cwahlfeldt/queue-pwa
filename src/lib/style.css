@@ -105,3 +105,8 @@ h4 {
 .anim-out {
   transform: translate3d(-200px, 0, 0);
 }
+
+.main-nav .branding {
+  position: relative;
+  top: 12px;
+}
