@@ -34,7 +34,7 @@ const AddButton = ({
     class={`
       ${isOpen ? 'rotate-45 bg-red' : 'bg-green rotate-90'}
       add-button button-reset
-      z-3 fixed font-thin
+      z-3 fixed font-light
       br-100 white aktiv
       shadow-1
     `}>
