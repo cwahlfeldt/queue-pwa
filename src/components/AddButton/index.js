@@ -6,8 +6,8 @@ import picostyle from 'picostyle'
 const style = picostyle(h)
 
 const X = style(`div`)({
-  'font-size': '59px',
-    'margin-top': `-10px`,
+  'font-size': '55px',
+  'margin-top': `-10px`,
   'margin-left': `1px`,
   'line-height': `${ square }px`,
 })
