@@ -1,11 +1,11 @@
 import localforage from 'localforage'
 import moment from 'moment'
 import shortid from 'shortid'
-import {twilio} from './util'
-import firebase from 'firebase/app'
-import 'firebase/auth'
-import 'firebase/firestore'
 import { location } from '@hyperapp/router'
+import {twilio} from './util'
+import firebase from '@firebase/app'
+import '@firebase/auth'
+import '@firebase/firestore'
 
 // init firebase
 firebase.initializeApp({
@@ -13,8 +13,6 @@ firebase.initializeApp({
   authDomain: 'queue-pwa.firebaseapp.com',
   projectId: 'queue-pwa',
 })
-
-
 
 export const state = {
   isLoggedIn: false,
@@ -83,7 +81,7 @@ export const actions = {
   }),
 
   // set the queuers this is used alot
-  setQueuers: queuers => state => ({queuers}),
+  setQueuers: queuers => () => ({queuers}),
 
   home: () => (state, actions) => {
     actions.location.go('/')

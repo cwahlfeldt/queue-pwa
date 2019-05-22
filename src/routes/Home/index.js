@@ -1,4 +1,4 @@
-import { h } from 'hyperapp'
+import { h } from 'hyperapp' // nolint
 import Container from '../../components/Container'
 
 const Home = ({ state, actions }) => (
@@ -26,7 +26,7 @@ const Home = ({ state, actions }) => (
                       {queuer.party_size}
                     </h4>
                     <button
-                      onclick={e => {
+                      onclick={() => {
                         actions.toggleModal(queuer)
                         actions.toast({
                           title: 'Beeeeeep Boop',
