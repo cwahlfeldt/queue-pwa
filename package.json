@@ -7,7 +7,7 @@
     "start": "parcel ./src/index.html --out-dir ./dist",
     "build": "parcel build ./src/index.html --out-dir ./dist",
     "dev": "parcel build ./src/index.html --out-dir ./dist --no-minify",
-    "clean": "rm -rf ./.cache ./dist ./pnpm-lock.yaml"
+    "c": "rm -rf ./.cache ./dist ./pnpm-lock.yaml"
   },
   "author": "cwahlfeldt",
   "license": "ISC",
