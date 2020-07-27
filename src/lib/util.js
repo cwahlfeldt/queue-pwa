@@ -9,9 +9,13 @@ export const twilio = (phone, message) => {
     Body: message,
   })
 
-  return fetch(`https://api.twilio.com/2010-04-01/Accounts/ACed9217511cdba64e20d03e2ac31c45eb/Messages.json`, {
+  const authToken = process.env.TWILIO_AUTH_TOKEN
+  const accountSid = process.env.TWILIO_ACCOUNT_SID
+  const encodedAuth = btoa(`${accountSid}:${authToken}`)
+
+  return fetch(`https://api.twilio.com/2010-04-01/Accounts/${authToken}/Messages.json`, {
     headers: {
-      Authorization: 'Basic QUNlZDkyMTc1MTFjZGJhNjRlMjBkMDNlMmFjMzFjNDVlYjpmM2ZmOTYwYjJmYjEzNDA2ZWRhMjQ4YzFlM2NiYzU2NA==',
+      Authorization: `Basic ${encodedAuth}`,
       'Content-Type': 'application/x-www-form-urlencoded',
     },
     method: 'POST',

@@ -1,6 +1,7 @@
 //
 // main app file
-
+import 'regenerator-runtime/runtime'
+require('dotenv').config()
 import { h, app } from 'hyperapp' // whats the fucking shit @TODO
 import { actions, state } from './lib/state'
 import App from './layouts/App'

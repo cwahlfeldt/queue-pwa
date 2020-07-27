@@ -30,16 +30,16 @@ const Nav = ({
       >
         Dashboard
       </a>
-      <a
-        class="green avenir f6 ttu fw5 ph4 pv3 link dim"
-        href="#"
-        onclick={e => {
-          e.preventDefault()
-          onSettings()
-        }}
-      >
-        Settings
-      </a>
+      {/* <a */}
+      {/*   class="green avenir f6 ttu fw5 ph4 pv3 link dim" */}
+      {/*   href="#" */}
+      {/*   onclick={e => { */}
+      {/*     e.preventDefault() */}
+      {/*     onSettings() */}
+      {/*   }} */}
+      {/* > */}
+      {/*   Settings */}
+      {/* </a> */}
       <a
         class="green pointer avenir f6 ttu fw5 ph4 pt3 link dim"
         href="#"

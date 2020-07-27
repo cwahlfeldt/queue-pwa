@@ -19,9 +19,11 @@
     "tailwindcss": "^0.7.4"
   },
   "dependencies": {
+    "@babel/preset-env": "^7.10.4",
     "@hyperapp/router": "^0.7.1",
     "autoprefixer": "^9.5.1",
-    "firebase": "^6.0.2",
+    "dotenv": "^8.2.0",
+    "firebase": "^6.6.2",
     "hyperapp": "^1.2.9",
     "localforage": "^1.7.3",
     "moment": "^2.24.0",
