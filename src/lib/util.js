@@ -6,6 +6,7 @@ const twilioRequestUrl = 'https://api.twilio.com/2010-04-01/Accounts/'+ process.
 const twilioAuth = 'Basic ' + btoa(process.env.TWILIO_ACCOUNT_SID + ':' + process.env.TWILIO_AUTH_TOKEN)
 const twilioPhoneNumber = process.env.TWILIO_PHONE_NUMBER
 console.log(twilioPhoneNumber, twilioRequestUrl, twilioAuth)
+console.log(process.env)
 
 export const twilio = async (phone, message) => {
   const query = queryString.stringify({
