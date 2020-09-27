@@ -36,7 +36,6 @@ export const state = {
 export const actions = {
   // init for the entire apps data and or dom manipulations
   init: () => (state, actions) => {
-    process.env.ENV !== `production` && console.log(state)
     actions.fetchQueuers()
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -50,9 +49,6 @@ export const actions = {
     return await fstr.collection("model-1")
       .get() // get it!
       .then(async querySnapshot => {
-        querySnapshot.forEach(doc => {
-          console.log(`${doc.id} => ${doc.data()}`);
-        })
         return querySnapshot
       })
   },
@@ -62,7 +58,6 @@ export const actions = {
   // toast functionality
   toast: ({title, message, type}) => (state, actions) => {
     setTimeout(() => {
-      process.env.ENV !== `production` && console.log(state)
       actions.setToast({title, message, type})
       actions.toggleToast()
     }, 300)
@@ -102,7 +97,7 @@ export const actions = {
           message: err.message,
           type: 'error',
         })
-        console.error(err.message)
+        console.error('check ln 100 in state.js')
       })
   },
 
@@ -149,7 +144,7 @@ export const actions = {
         }
       })
       .catch(err => {
-        console.log(err)
+        console.log('check ln 134 in state.js')
       })
   },
 
@@ -207,8 +202,8 @@ export const actions = {
   textQueuer: message => state => {
     if (state.number === '') return
     twilio(state.number, message)
-      .then(resp => console.log(resp))
-      .catch(err => console.log(err))
+      .then(resp => {return resp})
+      .catch(err => console.log('check ln 202 in state.js'))
   },
 
   onTextQueuer: message => (state, actions) => {
@@ -225,7 +220,7 @@ export const actions = {
           'Your table is ready! Please see the host for more details.',
         )
       })
-      .catch(err => console.error(err))
+      .catch(err => console.error('check ln 215 of state.js'))
   },
 
   saveQueuer: () => (state, actions) => {
@@ -260,7 +255,7 @@ export const actions = {
         actions.nullifyFields()
       })
       .catch(err => {
-        console.log(err)
+        console.log('check ln 226 in state.js')
         actions.nullifyFields()
       })
   },
@@ -280,7 +275,7 @@ export const actions = {
         actions.setQueuers(data)
       })
       .catch(err => {
-        console.log(err)
+        console.log('check ln 263 in state.js')
       })
   },
 
@@ -297,7 +292,7 @@ export const actions = {
         }, 300)
       })
       .catch(err => {
-        console.log(err)
+        console.log('check ln 282 in state.js')
       })
   },
 
@@ -316,7 +311,7 @@ export const actions = {
         actions.setQueuers(data)
       })
       .catch(err => {
-        console.log(err)
+        console.log('check ln 299 in state.js')
       })
   },
 
