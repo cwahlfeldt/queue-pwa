@@ -2,16 +2,20 @@
 // utilities
 import queryString from 'query-string';
 
-export const twilio = (phone, message) => {
+const twilioRequestUrl = 'https://api.twilio.com/2010-04-01/Accounts/'+ process.env.TWILIO_ACCOUNT_SID + '/Messages.json';
+const twilioAuth = 'Basic ' + btoa(process.env.TWILIO_ACCOUNT_SID + ':' + process.env.TWILIO_AUTH_TOKEN)
+const twilioPhoneNumber = process.env.TWILIO_PHONE_NUMBER
+
+export const twilio = async (phone, message) => {
   const query = queryString.stringify({
     To: phone,
-    From: 2175744130,
+    From: twilioPhoneNumber,
     Body: message,
   })
 
-  return fetch(`https://api.twilio.com/2010-04-01/Accounts/ACed9217511cdba64e20d03e2ac31c45eb/Messages.json`, {
+  return fetch(twilioRequestUrl, {
     headers: {
-      Authorization: 'Basic QUNlZDkyMTc1MTFjZGJhNjRlMjBkMDNlMmFjMzFjNDVlYjpmM2ZmOTYwYjJmYjEzNDA2ZWRhMjQ4YzFlM2NiYzU2NA==',
+      Authorization: twilioAuth,
       'Content-Type': 'application/x-www-form-urlencoded',
     },
     method: 'POST',

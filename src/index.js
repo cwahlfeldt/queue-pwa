@@ -1,14 +1,16 @@
 //
 // main app file
 
-import { h, app } from 'hyperapp' // whats the fucking shit @TODO
+require('dotenv').config()
+
+import { h, app } from 'hyperapp'
 import { actions, state } from './lib/state'
 import App from './layouts/App'
 import { location } from '@hyperapp/router'
 import 'tachyons-custom'
 import './lib/style.css'
 import './lib/vars.css'
-import './lib/tailwind.css'
+// import './lib/tailwind.css'
 
 // main app....duh
 const main = app(

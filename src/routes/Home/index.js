@@ -25,27 +25,27 @@ const Home = ({ state, actions }) => (
                     <h4 class="name avenir black fw4 f4 w3 pv3 ml-auto pr4 tc">
                       {queuer.party_size}
                     </h4>
-                    <button
-                      onclick={() => {
-                        actions.toggleModal(queuer)
-                        actions.toast({
-                          title: 'Beeeeeep Boop',
-                          message: `coming soon!`,
-                          type: 'success',
-                        })
-                      }}
-                      style={{'background-color': `#666`, border: `2px solid #666`, 'border-radius': `100%`}} class="serif flex flex-row justify-center items-center w2 h2">
-                      <h4
-                        style={{
-                          color: '#fff',
-                          'font-size': `16px`,
-                          'line-height': `16px`,
-                        }}
-                        class="name font-serif b fw4 f4 tc"
-                      >
-                        i
-                      </h4>
-                    </button>
+                    {/* <button */}
+                    {/*   onclick={() => { */}
+                    {/*     actions.toggleModal(queuer) */}
+                    {/*     actions.toast({ */}
+                    {/*       title: 'Beeeeeep Boop', */}
+                    {/*       message: `coming soon!`, */}
+                    {/*       type: 'success', */}
+                    {/*     }) */}
+                    {/*   }} */}
+                    {/*   style={{'background-color': `#666`, border: `2px solid #666`, 'border-radius': `100%`}} class="serif flex flex-row justify-center items-center w2 h2"> */}
+                    {/*   <h4 */}
+                    {/*     style={{ */}
+                    {/*       color: '#fff', */}
+                    {/*       'font-size': `16px`, */}
+                    {/*       'line-height': `16px`, */}
+                    {/*     }} */}
+                    {/*     class="name font-serif b fw4 f4 tc" */}
+                    {/*   > */}
+                    {/*     i */}
+                    {/*   </h4> */}
+                    {/* </button> */}
                   </div>
                 )}
               </div>

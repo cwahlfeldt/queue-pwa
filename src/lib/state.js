@@ -3,13 +3,13 @@ import moment from 'moment'
 import shortid from 'shortid'
 import { location } from '@hyperapp/router'
 import {twilio} from './util'
-import firebase from '@firebase/app'
-import '@firebase/auth'
-import '@firebase/firestore'
+import firebase from 'firebase/app'
+import 'firebase/auth'
+import 'firebase/firestore'
 
 // init firebase
 firebase.initializeApp({
-  apiKey: 'AIzaSyBtY-TMXxTIvtXighdhoOdcDRu4mHyIxAY',
+  apiKey: process.env.FIREBASE_API_KEY,
   authDomain: 'queue-pwa.firebaseapp.com',
   projectId: 'queue-pwa',
 })

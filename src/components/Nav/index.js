@@ -20,26 +20,26 @@ const Nav = ({
     <div class="menu flex flex-column pb4 br1 b--green">
       {/*<a class="green avenir f6 ttu fw5 ph4 pv3 link dim" href="#">Dashboard</a>*/}
       {/*<a class="green avenir f6 ttu fw5 ph4 pv3 link dim strike" disabled href="#">Auto Queue</a>*/}
-      <a
-        class="green avenir f6 ttu fw5 ph4 pv3 link dim"
-        href="#"
-        onclick={e => {
-          e.preventDefault()
-          onHome()
-        }}
-      >
-        Dashboard
-      </a>
-      <a
-        class="green avenir f6 ttu fw5 ph4 pv3 link dim"
-        href="#"
-        onclick={e => {
-          e.preventDefault()
-          onSettings()
-        }}
-      >
-        Settings
-      </a>
+      {/* <a */}
+      {/*   class="green avenir f6 ttu fw5 ph4 pv3 link dim" */}
+      {/*   href="#" */}
+      {/*   onclick={e => { */}
+      {/*     e.preventDefault() */}
+      {/*     onHome() */}
+      {/*   }} */}
+      {/* > */}
+      {/*   Dashboard */}
+      {/* </a> */}
+      {/* <a */}
+      {/*   class="green avenir f6 ttu fw5 ph4 pv3 link dim" */}
+      {/*   href="#" */}
+      {/*   onclick={e => { */}
+      {/*     e.preventDefault() */}
+      {/*     onSettings() */}
+      {/*   }} */}
+      {/* > */}
+      {/*   Settings */}
+      {/* </a> */}
       <a
         class="green pointer avenir f6 ttu fw5 ph4 pt3 link dim"
         href="#"

@@ -16,6 +16,14 @@ h1.branding {
   outline: none !important;
 }
 
+a {
+  transition: none !important;
+  color: #39c172 !important;
+}
+a:hover {
+  color: #19763F !important;
+}
+
 .button-reset {
   border: 0;
   padding: 0;
