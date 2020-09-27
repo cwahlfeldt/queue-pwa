@@ -1,7 +1,10 @@
 //
 // main app file
 
-require('dotenv').config()
+// console.log(process.env.NODE_ENV)
+if (process.env.NODE_ENV === 'development') {
+    require('dotenv').config()
+}
 
 import { h, app } from 'hyperapp'
 import { actions, state } from './lib/state'
