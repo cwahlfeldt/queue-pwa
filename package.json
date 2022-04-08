@@ -28,7 +28,7 @@
     "firebase": "^7.21.1",
     "hyperapp": "^1.2.9",
     "localforage": "^1.7.3",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "parcel-bundler": "^1.12.4",
     "picostyle": "^2.2.0",
     "postcss": "^7.0.16",
